@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Riiwwxz Payment</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Consolas, monospace;
+}
+
+/* ================= BOOT SCREEN ================= */
+#boot{
+  position:fixed;
+  inset:0;
+  background:black;
+  color:#00ff88;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  z-index:9999;
+  padding:20px;
+}
+
+.boot-text{
+  white-space:pre-line;
+  text-shadow:0 0 10px #00ff88;
+}
+
+/* ================= MAIN ================= */
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:black;
+  color:#e0f7ff;
+}
+
+/* video */
+#bgVideo{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-3;
+  filter:brightness(.25);
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:-2;
+}
+
+/* logo */
+.logo{
+  position:absolute;
+  top:35px;
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#00e5ff;
+  text-shadow:0 0 10px #00e5ff,0 0 30px #00e5ff;
+}
+
+/* card */
+.card{
+  backdrop-filter:blur(18px);
+  background:rgba(0,15,20,.8);
+  padding:28px;
+  border-radius:20px;
+  width:350px;
+  text-align:center;
+  border:2px solid #00e5ff;
+}
+
+.title{
+  margin:12px 0;
+}
+
+.pay,.btn{
+  margin:8px 0;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #00e5ff;
+  background:transparent;
+  color:#00e5ff;
+  cursor:pointer;
+}
+
+.pay:hover,.btn:hover{
+  background:#00e5ff;
+  color:black;
+}
+
+.qris{
+  width:220px;
+  margin-top:10px;
+  background:white;
+  padding:10px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= BOOT SCREEN ================= -->
+<div id="boot">
+  <div class="boot-text" id="bootText"></div>
+</div>
+
+<!-- ================= VIDEO ================= -->
+<video autoplay muted loop playsinline id="bgVideo"></video>
+<div class="overlay"></div>
+
+<div class="logo">⚡ RIIWWXZ ⚡</div>
+
+<div class="card">
+  <h2 class="title">⚡ RIIWWXZ PAYMENT ⚡</h2>
+
+  <div class="pay" onclick="copy('083897762065')">DANA — 083897762065</div>
+  <div class="pay" onclick="copy('082128399932')">GOPAY — 082128399932</div>
+  <div class="pay" onclick="copy('901068812599')">SEABANK — 901068812599</div>
+
+  <h3 class="title">SCAN QRIS</h3>
+  <img class="qris" src="https://o.uguu.se/AdPXlbbr.jpg">
+
+  <h3 class="title">TELEGRAM</h3>
+  <a href="https://t.me/Riiwwxz_12"><button class="btn">Chat</button></a>
+  <a href="https://t.me/Reall_Testi"><button class="btn">Channel</button></a>
+  <a href="https://t.me/Riiwwxz_V1"><button class="btn">Group</button></a>
+</div>
+
+<!-- ================= SOUNDS ================= -->
+
+<!-- musik background -->
+<audio id="bgm" loop>
+  <source src="https://n.uguu.se/MeMDopcl.mp3">
+</audio>
+
+<!-- klik sound -->
+<audio id="clickSound">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_click_02.mp3">
+</audio>
+
+<!-- boot sound -->
+<audio id="bootSound">
+  <source src="https://cdn.pixabay.com/audio/2022/03/24/audio_digital_boot.mp3">
+</audio>
+
+<script>
+/* ================= SET VIDEO LINK ================= */
+const videoURL = "https://n.uguu.se/qvDQacOK.mp4";
+document.getElementById("bgVideo").src = videoURL;
+
+/* ================= CLICK SOUND ================= */
+const clickSound=document.getElementById("clickSound");
+function playClick(){
+  clickSound.currentTime=0;
+  clickSound.play();
+}
+
+document.querySelectorAll(".pay,.btn").forEach(el=>{
+  el.addEventListener("click",playClick);
+});
+
+/* ================= COPY ================= */
+function copy(text){
+  navigator.clipboard.writeText(text);
+  playClick();
+  alert("Copied: "+text);
+}
+
+/* ================= BOOT EFFECT ================= */
+const bootText=document.getElementById("bootText");
+const bootSound=document.getElementById("bootSound");
+const bgm=document.getElementById("bgm");
+
+const lines=[
+"> Initializing system...",
+"> Connecting payment gateway...",
+"> Loading secure channel...",
+"> Access Granted ✓",
+"> Welcome Riiwwxz"
+];
+
+let i=0;
+
+bootSound.play();
+
+const interval=setInterval(()=>{
+  bootText.innerHTML+=lines[i]+"\n";
+  i++;
+  if(i>=lines.length){
+    clearInterval(interval);
+    setTimeout(()=>{
+      document.getElementById("boot").style.display="none";
+      bgm.volume=0.5;
+      bgm.play();
+    },1000);
+  }
+},600);
+</script>
+
+</body>
+</html>
