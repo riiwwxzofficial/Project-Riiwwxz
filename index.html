@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Riiwwxz - Payment</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:black;
+  color:#e0f7ff;
+}
+
+/* ================= VIDEO BG ================= */
+#bgVideo{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.25) contrast(1.2);
+  z-index:-3;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#001a22aa,#000000ee);
+  z-index:-2;
+}
+
+/* ================= LOGO NEON ================= */
+.logo{
+  position:absolute;
+  top:35px;
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#00e5ff;
+
+  text-shadow:
+    0 0 5px #00e5ff,
+    0 0 10px #00e5ff,
+    0 0 20px #00e5ff,
+    0 0 40px #00e5ff;
+
+  animation:flicker 2.5s infinite alternate;
+}
+
+@keyframes flicker{
+  0%,18%,22%,25%,53%,57%,100%{opacity:1;}
+  20%,24%,55%{opacity:.35;}
+}
+
+/* ================= PARTICLES ================= */
+.particle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:#00e5ff;
+  border-radius:50%;
+  box-shadow:0 0 8px #00e5ff;
+  animation:float 10s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-120vh)}
+}
+
+/* ================= CARD ================= */
+.card{
+  backdrop-filter:blur(20px);
+  background:rgba(0,15,20,.75);
+  padding:28px;
+  border-radius:20px;
+  width:350px;
+  text-align:center;
+
+  border:2px solid #00e5ff;
+
+  box-shadow:
+    0 0 10px #00e5ff,
+    0 0 30px #00e5ff,
+    inset 0 0 20px #00e5ff33;
+
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 10px #00e5ff;}
+  to{box-shadow:0 0 35px #00e5ff;}
+}
+
+h1{
+  font-size:20px;
+  margin:12px 0;
+  text-shadow:0 0 10px #00e5ff;
+}
+
+/* payment */
+.pay{
+  background:#00e5ff11;
+  border:1px solid #00e5ff55;
+  padding:12px;
+  margin:10px 0;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.pay:hover{
+  background:#00e5ff33;
+  transform:scale(1.05);
+  box-shadow:0 0 15px #00e5ff;
+}
+
+/* QRIS */
+.qris{
+  width:220px;
+  margin-top:10px;
+  border-radius:12px;
+  padding:10px;
+  background:white;
+  box-shadow:0 0 20px #00e5ff;
+}
+
+/* buttons */
+.btn{
+  margin-top:8px;
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #00e5ff;
+  background:transparent;
+  color:#00e5ff;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.25s;
+}
+
+.btn:hover{
+  background:#00e5ff;
+  color:black;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGO -->
+<div class="logo">⚡ RIIWWXZ ⚡</div>
+
+<!-- VIDEO -->
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="https://n.uguu.se/qvDQacOK.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- PARTICLES -->
+<script>
+for(let i=0;i<50;i++){
+  const p=document.createElement('div')
+  p.className='particle'
+  p.style.left=Math.random()*100+'%'
+  p.style.animationDuration=(Math.random()*8+5)+'s'
+  document.body.appendChild(p)
+}
+</script>
+
+<!-- CARD -->
+<div class="card">
+
+  <h1>⚡ CYBER PAYMENT ⚡</h1>
+
+  <div class="pay" onclick="copy('083897762065')">DANA — 083897762065</div>
+  <div class="pay" onclick="copy('082128399932')">GOPAY — 082128399932</div>
+  <div class="pay" onclick="copy('901068812599')">SEABANK — 901068812599</div>
+
+  <h1>SCAN QRIS</h1>
+  <img class="qris" src="https://o.uguu.se/AdPXlbbr.jpg">
+
+  <h1>TELEGRAM</h1>
+
+  <a href="https://t.me/Riiwwxz_12" target="_blank"><button class="btn">Chat</button></a>
+  <a href="https://t.me/Reall_Testi" target="_blank"><button class="btn">Channel</button></a>
+  <a href="https://t.me/Riiwwxz_V1" target="_blank"><button class="btn">Group</button></a>
+
+</div>
+
+<!-- ================= AUTO MUSIC ================= -->
+<audio id="bgm" loop autoplay>
+  <source src="https://n.uguu.se/MeMDopcl.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function copy(text){
+  navigator.clipboard.writeText(text);
+  alert("Copied: " + text);
+}
+
+/* paksa autoplay di HP */
+const music = document.getElementById("bgm");
+window.addEventListener("load",()=>{
+  music.volume=0.5;
+  music.play().catch(()=>{});
+});
+document.body.addEventListener("click",()=>music.play(),{once:true});
+</script>
+
+</body>
+</html>
