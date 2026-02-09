@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KEEIIHOSTING Payment</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Consolas, monospace;
+}
+
+/* BOOT */
+#boot{
+  position:fixed;
+  inset:0;
+  background:#000;
+  color:#00ff88;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  z-index:9999;
+}
+.boot-text{
+  white-space:pre-line;
+  text-shadow:0 0 10px #00ff88;
+}
+
+/* BODY */
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:black;
+  color:#e0f7ff;
+}
+
+/* VIDEO BG */
+#bgVideo{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.28);
+  z-index:-3;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:-2;
+}
+
+/* LOGO */
+.logo{
+  position:absolute;
+  top:30px;
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#00e5ff;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{ text-shadow:0 0 10px #00e5ff; }
+  to{ text-shadow:0 0 40px #00e5ff,0 0 80px #00e5ff; }
+}
+
+/* CARD */
+.card{
+  backdrop-filter:blur(18px);
+  background:rgba(0,15,20,.85);
+  padding:28px;
+  border-radius:20px;
+  width:350px;
+  text-align:center;
+  border:2px solid #00e5ff;
+}
+
+.title{margin:12px 0;}
+
+.pay,.btn{
+  margin:8px 0;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #00e5ff;
+  background:transparent;
+  color:#00e5ff;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.pay:hover,.btn:hover{
+  background:#00e5ff;
+  color:black;
+  transform:scale(1.05);
+}
+
+.qris{
+  width:220px;
+  margin-top:10px;
+  background:white;
+  padding:10px;
+  border-radius:10px;
+}
+
+/* TOAST */
+#toast{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#00e5ff;
+  color:black;
+  padding:10px 18px;
+  border-radius:8px;
+  opacity:0;
+  transition:.3s;
+}
+#toast.show{opacity:1;}
+</style>
+</head>
+
+<body>
+
+<!-- BOOT SCREEN -->
+<div id="boot">
+  <div class="boot-text" id="bootText"></div>
+</div>
+
+<!-- VIDEO -->
+<video autoplay muted loop playsinline id="bgVideo"></video>
+<div class="overlay"></div>
+
+<!-- LOGO -->
+<div class="logo">⚡ KEEIIHOSTING ⚡</div>
+
+<!-- CARD -->
+<div class="card">
+  <h2 class="title">⚡ KEEIIHOSTING PAYMENT ⚡</h2>
+
+  <div class="pay" onclick="copy('0895401998581')">
+    DANA — 0895401998581<br><small>A/N ANI</small>
+  </div>
+
+  <div class="pay" onclick="copy('0895401998581')">
+    GOPAY — 0895401998581<br><small>A/N RADITYA</small>
+  </div>
+
+  <h3 class="title">SCAN QRIS</h3>
+  <img class="qris" src="https://iili.io/fpxyFBn.jpg">
+
+  <h3 class="title">TELEGRAM</h3>
+  <a href="https://t.me/keiiihostting"><button class="btn">Chat</button></a>
+  <a href="https://t.me/TestimoniKeiiStore"><button class="btn">Channel</button></a>
+  <a href="https://t.me/+TTijnJTmIVMwZTg1"><button class="btn">Group</button></a>
+</div>
+
+<div id="toast">Copied ✓</div>
+
+<!-- SOUND -->
+<audio id="bootSound" src="https://n.uguu.se/JtyvWjwG.mp3"></audio>
+<audio id="clickSound" src="https://h.uguu.se/AdxASppu.mp3"></audio>
+
+<script>
+/* VIDEO LINK (bisa ganti) */
+document.getElementById("bgVideo").src =
+"https://h.uguu.se/oVbOOqJb.mp4";
+
+/* BOOT SOUND AUTO */
+const bootSound=document.getElementById("bootSound");
+window.addEventListener("load",()=>bootSound.play().catch(()=>{}));
+
+/* CLICK SOUND */
+const clickSound=document.getElementById("clickSound");
+function playClick(){
+  clickSound.currentTime=0;
+  clickSound.play();
+}
+document.querySelectorAll(".pay,.btn").forEach(el=>{
+  el.addEventListener("click",playClick);
+});
+
+/* COPY */
+const toast=document.getElementById("toast");
+function copy(text){
+  navigator.clipboard.writeText(text);
+  playClick();
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1200);
+}
+
+/* BOOT TEXT */
+const bootText=document.getElementById("bootText");
+const text=`> Initializing system...
+> Connecting KEEIIHOSTING gateway...
+> Access Granted ✓
+> Welcome To Payment KeeiiHosting`;
+
+let i=0;
+function type(){
+  if(i<text.length){
+    bootText.innerHTML+=text[i++];
+    setTimeout(type,18);
+  }else{
+    setTimeout(()=>boot.style.display="none",600);
+  }
+}
+type();
+</script>
+
+</body>
+</html>
